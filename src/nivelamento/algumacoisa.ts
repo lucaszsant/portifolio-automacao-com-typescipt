@@ -25,18 +25,5 @@ verificarIdade(jogador);
 verificarIdade(jogadorVelho);
 
 
-type kkk={
-    nome:string;
-    preco:number;
-};
-let kkk: Jogo={
-    'nome':"Mortal Kombat",
-    'preco':75
-}
-let legal=jogo.preco>=100
-?`O jogo ${jogo.nome} está custando R$ ${jogo.preco}. está caro`
-:`O jogo ${jogo.nome} está custando R$ ${jogo.preco}. está barato`;
-
-console.log(legal);
 
 
