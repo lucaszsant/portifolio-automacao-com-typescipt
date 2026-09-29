@@ -2,7 +2,7 @@ import {test, expect} from 'vitest';
 
 const BASE_URL= 'https://jsonplaceholder.typicode.com';
 
-test('Método POST para criar um nobo post', async()=> {
+test('Método POST para criar um novo post', async()=> {
     const res= await fetch(`${BASE_URL}/posts` , {
         method:'POST',
         headers: {
