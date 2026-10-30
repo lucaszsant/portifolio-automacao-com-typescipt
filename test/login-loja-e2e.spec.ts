@@ -48,8 +48,8 @@ test.describe('Ato 2- Caminho Feliz', () => {
             await page.goto(`${BASE_URL}/login.html`);
 
             // preencher campos utilizando o fill()
-            await page.fill('#email', 'slow@system.com');
-            await page.fill('#password', 'SlowPass123');
+            await page.fill('#email', 'email-invalido');
+            await page.fill('#password', 'AdminPassword123');
 
             // validar botão ativo
             await expect(page.locator('#loginBtn')).toBeDisabled();
@@ -59,25 +59,47 @@ test.describe('Ato 2- Caminho Feliz', () => {
 //Criar bloco de teste ato 3 para criar usuários de cliente e logistica e 
 // validar login de cada um deles formulário de cadastro e o login deles
 
-test.describe('Ato3- Criar usuário de cliente e logista',() =>{
-      test('criar e validar login de cada um deles', 
-        async({page})=>{
-            // pagina de cadastro
-            await page.goto(`${BASE_URL}/login.html`)
+test.describe('Ato3- Criar usuário de cliente e lojista', () => {
 
-            // clicar para abrir o cadastro
-        await page.locator('.login-link a').first() .click();
+    test('criar e validar login de cada um deles', async ({ page }) => {
 
-            //  preenchimento do cadastro do cliente
-            await page.fill('#email', 'joubileu1234@gmail.com')
-            await page.fill('#password', '123456789')
-            // validar botão de cadastro
-            await expect(page.locator('#cadastroBtn')).toBeEnabled();
-      })
+        // Abrir página de login
+        await page.goto(`${BASE_URL}/login.html`);
 
-})
+        // Clicar em "Criar conta"
+        await page.locator('.login-links a').filter({ hasText: 'Criar conta' }).click();
 
+        // Preencher nome
+        await page.fill('#reg-name', 'Cliente Teste');
 
+        // Preencher e-mail
+        await page.fill('#reg-email', 'cliente.teste@gmail.com');
 
+        // Preencher senha
+        await page.fill('#reg-password', 'ClientePass123');
 
+        // Selecionar Cliente
+        await page.selectOption('#reg-role', 'user');
 
+        // Validar botão de cadastro
+        await expect(page.locator('#registerBtn')).toBeEnabled();
+
+        // Clicar em cadastrar
+        await page.locator('#registerBtn').click();
+    });
+
+});
+test.describe('etapa para acessar a tela de login', () => {
+    test('acessar pagina de login', 
+        async ({ page }) => {
+            //pagina de login
+        await page.goto(`${BASE_URL}/login.html`);
+        //colocar os dados: email e senha.
+        await page.locator('#email').fill('admin@system.com')
+        await page.locator('#password').fill ('AdminPassword123')
+        //botão para permitir o acesso ao usuário
+        await expect(page.locator('#loginBtn')).toBeEnabled()
+        await page.click('#loginBtn');
+    });
+
+});
